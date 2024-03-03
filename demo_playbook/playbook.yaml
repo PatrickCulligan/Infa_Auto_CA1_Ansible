@@ -1,0 +1,18 @@
+--- 
+- 
+  hosts: servers
+  tasks: 
+    - 
+      name: "Update cache"
+      yum: update_cache=yes
+    - 
+      name: "Install Apache"
+      yum: "name={{ package }} state=present"
+    - 
+      name: "Create index.html"
+      shell: echo "<html><h1>Hello from Ansible!</h1></html>" > /var/www/html/index.html
+    - 
+      name: "Start Apache"
+      service: "name={{ package }} state=started"
+  vars: 
+    package: httpd
